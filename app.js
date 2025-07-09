@@ -10,6 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/api', authRoutes);
 app.use('/api', categoryRoutes); 
-app.use('/api/products', productRoutes);
+app.use('/api', productRoutes);
 
 module.exports = app;

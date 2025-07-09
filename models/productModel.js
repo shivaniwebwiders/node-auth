@@ -1,10 +1,9 @@
-const db = require('../config/db');
+const db = require('../config/db'); // mysql2 connection
 
-// Create a new product
+// Create product
 exports.createProduct = (data, cb) => {
   const sql = `
-    INSERT INTO products 
-    (name, description, price, stock, sku, imageUrl, categoryId) 
+    INSERT INTO products (name, description, price, stock, sku, imageUrl, categoryId)
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
   const values = [
@@ -23,7 +22,7 @@ exports.createProduct = (data, cb) => {
 exports.getAllProducts = (cb) => {
   const sql = `
     SELECT p.*, c.name as categoryName 
-    FROM products p 
+    FROM products p
     LEFT JOIN categories c ON p.categoryId = c.id
   `;
   db.query(sql, cb);
@@ -61,7 +60,7 @@ exports.deleteProduct = (id, cb) => {
   db.query(sql, [id], cb);
 };
 
-// Optional: Find by SKU
+// Find product by SKU
 exports.findProductBySku = (sku, cb) => {
   const sql = 'SELECT * FROM products WHERE sku = ?';
   db.query(sql, [sku], cb);

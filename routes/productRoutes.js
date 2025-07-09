@@ -1,5 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/productController');
+const productController = require('../controllers/productController'); // ✅ Controller
+const { createProductRules } = require('../validators/productValidator'); // ✅ Validator
 
-router.get('/products', productController.getAllProducts); // 👈 likely here
+// POST - Create product
+router.post('/products', createProductRules, productController.createProduct);
+
+// GET - All products
+router.get('/products-all', productController.getAllProducts);
+
+// PUT - Update product
+router.put('/products/:id', productController.updateProduct);
+
+// DELETE - Delete product
+router.delete('/products/:id', productController.deleteProduct);
+
+module.exports = router;
