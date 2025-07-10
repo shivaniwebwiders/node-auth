@@ -9,7 +9,7 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 app.use('/api', authRoutes);
-app.use('/api', categoryRoutes); 
+app.use('/api/categories', categoryRoutes); 
 app.use('/api', productRoutes);
 
 module.exports = app;

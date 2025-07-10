@@ -1,13 +1,16 @@
 const express = require('express');
+const { body } = require('express-validator');
 const router = express.Router();
-const categoryController = require('../controllers/categoryController'); // ✅ Required!
-// const { createCategory } = require('../controllers/categoryController');
-const { createCategoryRules } = require('../validators/categoryValidator');
+const CategoryController = require('../controllers/categoryController');
 
-router.post('/categories', createCategoryRules, categoryController.createCategory);
-// GET - All categories
-router.get('/categories-all', categoryController.getAllCategories);
-router.put('/categories/:id', categoryController.updateCategory);
-router.delete('/categories/:id', categoryController.deleteCategory);
+router.post(
+  '/',
+  [body('name').notEmpty().withMessage('Name is required')],
+  CategoryController.createCategory
+);
+
+router.get('/', CategoryController.getAllCategories);
+router.put('/:id', CategoryController.updateCategory);
+router.delete('/:id', CategoryController.deleteCategory);
 
 module.exports = router;

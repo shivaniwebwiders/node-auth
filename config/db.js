@@ -14,4 +14,5 @@ connection.connect(err => {
   console.log('MySQL connected');
 });
 
-module.exports = connection;
+// Export a promise-based connection
+module.exports = connection.promise();
