@@ -7,5 +7,7 @@ exports.createProductRules = [
   body('stock').isInt({ min: 0 }).withMessage('Stock must be a non-negative integer'),
   body('sku').notEmpty().withMessage('SKU is required'),
   body('imageUrl').isURL().withMessage('Image URL must be valid'),
-  body('categoryId').notEmpty().withMessage('Category ID is required')
+  body('categoryId')
+    .notEmpty().withMessage('categoryId is required')
+    .isInt().withMessage('categoryId must be a valid integer'),
 ];
